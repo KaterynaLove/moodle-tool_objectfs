@@ -154,5 +154,28 @@ function xmldb_tool_objectfs_upgrade($oldversion) {
 
         upgrade_plugin_savepoint(true, 2022070401, 'tool', 'objectfs');
     }
+
+     if ($oldversion < 2022120803) {
+
+        // Define table tool_objectfs_delay_delete to be created.
+        $table = new xmldb_table('tool_objectfs_delay_delete');
+
+        // Adding fields to table tool_objectfs_delay_delete.
+        $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
+        $table->add_field('contenthash', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
+        $table->add_field('status', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, '0');
+
+        // Adding keys to table tool_objectfs_delay_delete.
+        $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);
+
+        // Conditionally launch create table for tool_objectfs_delay_delete.
+        if (!$dbman->table_exists($table)) {
+            $dbman->create_table($table);
+        }
+
+        // Objectfs savepoint reached.
+        upgrade_plugin_savepoint(true, 2022120803, 'tool', 'objectfs');
+    }
     return true;
 }

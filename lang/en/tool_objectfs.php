@@ -169,6 +169,11 @@ $string['settings:batchsize'] = 'Number files in one batch';
 $string['settings:batchsize_help'] = 'Number of files to be transferred in one cron run';
 $string['settings:maxorphanedage'] = 'Max orphaned object age';
 $string['settings:maxorphanedage_help'] = 'If set to zero, this will not delete old orphaned metadata for objects. Otherwise, it will remove these records as they are no longer relevant. An orphaned object is one where the metadata exists on the {tool_objectfs_objects} table but referenced file no longer exists.';
+
+$string['settings:delaydeleteexternalobject'] = 'Delay delete external object';
+$string['settings:delaydeleteexternalobject_help'] = 'Delay delete exteranl objects once they are in external storage after some period of time.';
+$string['delay_delete_external_objects_task'] = 'Delay delete external objects task';
+
 $string['settings:minimumage'] = 'Minimum age';
 $string['settings:minimumage_help'] = 'Minimum age that a object must exist on the local filedir before it will be considered for transfer.';
 $string['settings:deleteexternal'] = 'Delete external objects';

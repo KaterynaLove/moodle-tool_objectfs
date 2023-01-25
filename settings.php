@@ -23,6 +23,7 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
+use local_aws\admin_settings_aws_region;
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/classes/local/manager.php');
@@ -96,6 +97,10 @@ if ($ADMIN->fulltree) {
     $settings->add(new admin_setting_configduration('tool_objectfs/maxorphanedage',
         new lang_string('settings:maxorphanedage', 'tool_objectfs'),
         new lang_string('settings:maxorphanedage_help', 'tool_objectfs'), 0, DAYSECS));
+
+    $settings->add(new admin_setting_configduration('tool_objectfs/delaydeleteexternalobject',
+        new lang_string('settings:delaydeleteexternalobject', 'tool_objectfs'),
+        new lang_string('settings:delaydeleteexternalobject_help', 'tool_objectfs'), 0, DAYSECS));
 
     $settings->add(new admin_setting_configcheckbox('tool_objectfs/enablelogging',
         new lang_string('settings:enablelogging', 'tool_objectfs'), '', ''));
@@ -249,4 +254,8 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configcheckbox('tool_objectfs/preferexternal',
         new lang_string('settings:preferexternal', 'tool_objectfs'), '', ''));
+        
+    $settings->add(new admin_settings_aws_region('tool_objectfs/s3_region',
+    	new \lang_string('settings:aws:region', 'tool_objectfs'),
+    	new \lang_string('settings:aws:region_help', 'tool_objectfs'), ''));
 }
