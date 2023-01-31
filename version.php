@@ -31,6 +31,3 @@ $plugin->requires  = 2020110900;      // Requires Filesystem API.
 $plugin->component = "tool_objectfs";
 $plugin->maturity  = MATURITY_STABLE;
 $plugin->supported = [310, 401];
-$plugin->dependencies = array(
-    'local_aws' => 2022011300
-);

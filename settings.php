@@ -254,8 +254,4 @@ if ($ADMIN->fulltree) {
 
     $settings->add(new admin_setting_configcheckbox('tool_objectfs/preferexternal',
         new lang_string('settings:preferexternal', 'tool_objectfs'), '', ''));
-        
-    $settings->add(new admin_settings_aws_region('tool_objectfs/s3_region',
-    	new \lang_string('settings:aws:region', 'tool_objectfs'),
-    	new \lang_string('settings:aws:region_help', 'tool_objectfs'), ''));
 }
