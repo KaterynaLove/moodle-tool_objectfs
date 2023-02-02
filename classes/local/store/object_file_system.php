@@ -622,23 +622,21 @@ abstract class object_file_system extends \file_system_filedir {
      * Deletes external file depending on deleteexternal settings.
      *
      * @param string $contenthash file to be moved
+     * @param boolean $forcedelete will force to delete the file
      */
-    public function delete_external_file_from_hash($contenthash, $force = false, $force_delay_delete = false) {
+    public function delete_external_file_from_hash($contenthash, $force = false, $forcedelete = false) {
         global $DB;
         if ($force || (!empty($this->deleteexternally) && $this->deleteexternally == TOOL_OBJECTFS_DELETE_EXTERNAL_FULL)) {
             $currentpath = $this->get_external_path_from_hash($contenthash);
-            $delay_delete_external_object = get_config('tool_objectfs', 'delaydeleteexternalobject');
-            if($force_delay_delete) {
+            $delaydeleteexternalobject = get_config('tool_objectfs', 'delaydeleteexternalobject');
+            if ($forcedelete || $delaydeleteexternalobject <= 0) {
                 $this->externalclient->delete_file($currentpath);
-            } else if ($delay_delete_external_object > 0)  {
-                $delay_objects_delete = new \stdClass();
-                $delay_objects_delete->contenthash = $contenthash;
-                $delay_objects_delete->timecreated = time();
+            } else if ($delaydeleteexternalobject > 0)  {
+                $delayobjectsdelete = new \stdClass();
+                $delayobjectsdelete->contenthash = $contenthash;
+                $delayobjectsdelete->timecreated = time();
 
-                $delay_objects_delete->id = $DB->insert_record('tool_objectfs_delay_delete', $delay_objects_delete, true);
-            } else {
-
-                $this->externalclient->delete_file($currentpath);
+                $delayobjectsdelete->id = $DB->insert_record('tool_objectfs_delay_delete', $delayobjectsdelete, true);
             }
         }
     }

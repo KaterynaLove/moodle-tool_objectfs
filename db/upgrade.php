@@ -164,7 +164,6 @@ function xmldb_tool_objectfs_upgrade($oldversion) {
         $table->add_field('id', XMLDB_TYPE_INTEGER, '10', null, XMLDB_NOTNULL, XMLDB_SEQUENCE, null);
         $table->add_field('contenthash', XMLDB_TYPE_CHAR, '40', null, XMLDB_NOTNULL, null, null);
         $table->add_field('timecreated', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, null);
-        $table->add_field('status', XMLDB_TYPE_INTEGER, '20', null, XMLDB_NOTNULL, null, '0');
 
         // Adding keys to table tool_objectfs_delay_delete.
         $table->add_key('primary', XMLDB_KEY_PRIMARY, ['id']);

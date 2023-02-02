@@ -15,11 +15,12 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Task that checks for old orphaned objects, and removes their metadata (record)
- * and external file (if delete external enabled) as it is no longer useful/relevant.
+
+ * Task that checks for files that were delayed for deletion.
+ * It deletes the files which have an expired delay time.
  *
  * @package   tool_objectfs
- * @author    Kevin Pham <kevinpham@catalyst-au.net>
+ * @author    Kateryna Martynenko <kateryna.martynenko@moodle.com>
  * @copyright Catalyst IT
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
@@ -42,7 +43,7 @@ class delay_delete_external_objects extends task {
         global $DB;
 
         $timeperiodforremoval = $this->config->delaydeleteexternalobject;
-        if (empty($timeperiodforremoval)) {
+        if ($timeperiodforremoval == 0) {
             mtrace('Skipping delayed deletion of the external object of the delaydeleteexternalobject is set to an empty value.');
             return;
         }
@@ -57,19 +58,16 @@ class delay_delete_external_objects extends task {
 
             // Compare the time when the file was supposed to be deleted immideately and the time selected in the "Delay delete external object" setting.
 
-            $sql = 'SELECT * FROM {tool_objectfs_delay_delete} WHERE status = 0 AND timecreated < :timeperiodforremoval';
+            $sql = 'SELECT * FROM {tool_objectfs_delay_delete} WHERE timecreated < :timeperiodforremoval LIMIT 1000';
 
             $objects = $DB->get_recordset_sql($sql, $params);
             $count = 0;
+
             foreach ($objects as $object) {
 
                 // Delete the external file.
                 $filesystem->delete_external_file_from_hash($object->contenthash, true, true);
-                // Update the status of the file in the tool_objectfs_delay_delete table.
-                $deletedexternalobject =  new \stdClass();
-                $deletedexternalobject->id = $object->id;
-                $deletedexternalobject->status = 1;
-                $DB->update_record('tool_objectfs_delay_delete', $deletedexternalobject);
+                $DB->delete_records('tool_objectfs_delay_delete', ['id' => $object->id]);
                 $count++;
             }
             $objects->close();
