@@ -185,6 +185,12 @@ class manager {
             $object->timeduplicated = time();
         }
 
+        // If location change is 'orphaned' we update timeorphaned. 
+        //Set time orphaned clock is ticking now for delay deletion comparison...
+        if ($newlocation === OBJECT_LOCATION_ORPHANED) {
+            $object->timeorphaned = time();
+        }
+
         $object->location = $newlocation;
         $DB->update_record('tool_objectfs_objects', $object);
 

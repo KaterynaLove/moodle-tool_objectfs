@@ -624,20 +624,12 @@ abstract class object_file_system extends \file_system_filedir {
      * @param string $contenthash file to be moved
      * @param boolean $forcedelete will force to delete the file
      */
-    public function delete_external_file_from_hash($contenthash, $force = false, $forcedelete = false) {
+    public function delete_external_file_from_hash($contenthash, $force = false) {
         global $DB;
+
         if ($force || (!empty($this->deleteexternally) && $this->deleteexternally == TOOL_OBJECTFS_DELETE_EXTERNAL_FULL)) {
             $currentpath = $this->get_external_path_from_hash($contenthash);
-            $delaydeleteexternalobject = get_config('tool_objectfs', 'delaydeleteexternalobject');
-            if ($forcedelete || $delaydeleteexternalobject <= 0) {
-                $this->externalclient->delete_file($currentpath);
-            } else if ($delaydeleteexternalobject > 0)  {
-                $delayobjectsdelete = new \stdClass();
-                $delayobjectsdelete->contenthash = $contenthash;
-                $delayobjectsdelete->timecreated = time();
-
-                $delayobjectsdelete->id = $DB->insert_record('tool_objectfs_delay_delete', $delayobjectsdelete, true);
-            }
+            $this->externalclient->delete_file($currentpath);
         }
     }
 

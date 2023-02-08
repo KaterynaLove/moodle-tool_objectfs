@@ -53,12 +53,13 @@ class delay_delete_external_objects extends task {
         ];
 
         if (!empty($this->config->delaydeleteexternalobject)) {
+
             // We need to delay the deletion of the external files.
             $filesystem = new $this->config->filesystem();
 
             // Compare the time when the file was supposed to be deleted immideately and the time selected in the "Delay delete external object" setting.
 
-            $sql = 'SELECT * FROM {tool_objectfs_delay_delete} WHERE timecreated < :timeperiodforremoval LIMIT 1000';
+            $sql = 'SELECT * FROM {tool_objectfs_objects} WHERE timeorphaned < :timeperiodforremoval LIMIT 1000';
 
             $objects = $DB->get_recordset_sql($sql, $params);
             $count = 0;
@@ -66,8 +67,8 @@ class delay_delete_external_objects extends task {
             foreach ($objects as $object) {
 
                 // Delete the external file.
-                $filesystem->delete_external_file_from_hash($object->contenthash, true, true);
-                $DB->delete_records('tool_objectfs_delay_delete', ['id' => $object->id]);
+                $filesystem->delete_external_file_from_hash($object->contenthash, true);
+                $DB->delete_records('tool_objectfs_objects', ['id' => $object->id]);
                 $count++;
             }
             $objects->close();
