@@ -155,7 +155,7 @@ function xmldb_tool_objectfs_upgrade($oldversion) {
         upgrade_plugin_savepoint(true, 2022070401, 'tool', 'objectfs');
     }
 
-        if ($oldversion < 2022120806) {
+    if ($oldversion < 2022120806) {
 
         // Define field timeorphaned to be added to tool_objectfs_objects.
         $table = new xmldb_table('tool_objectfs_objects');
@@ -169,6 +169,6 @@ function xmldb_tool_objectfs_upgrade($oldversion) {
         // Objectfs savepoint reached.
         upgrade_plugin_savepoint(true, 2022120806, 'tool', 'objectfs');
     }
-    
+
     return true;
 }

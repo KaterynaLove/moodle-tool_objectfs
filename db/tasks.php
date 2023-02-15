@@ -107,14 +107,4 @@ $tasks = array(
         'dayofweek' => '*',
         'month'     => '*'
     ),
-        array(
-        'classname' => 'tool_objectfs\task\delay_delete_external_objects',
-        'blocking'  => 0,
-        'minute'    => '*',
-        'hour'      => '*',
-        'day'       => '*',
-        'dayofweek' => '*',
-        'month'     => '*'
-    ),
 );
-
