@@ -23,7 +23,6 @@
  * @license   http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
-use local_aws\admin_settings_aws_region;
 defined('MOODLE_INTERNAL') || die();
 
 require_once(__DIR__ . '/classes/local/manager.php');
