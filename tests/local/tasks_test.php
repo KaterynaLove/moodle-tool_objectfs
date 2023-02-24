@@ -16,6 +16,8 @@
 
 namespace tool_objectfs\local;
 
+use tool_objectfs\tests\test_file_system;
+
 /**
  * End to end tests for tasks. Make sure all the plumbing is ok.
  *
@@ -30,6 +32,14 @@ class tasks_test extends \tool_objectfs\tests\testcase {
 
     protected function tearDown(): void {
         ob_end_clean();
+    }
+
+    public static function orphaned_count($deletetime = 0) {
+        global $DB;
+
+        $orphaned_count = $DB->count_records_sql("SELECT COUNT(id) FROM tool_objectfs_objects WHERE timeorphaned > $deletetime");
+
+        return $orphaned_count;
     }
 
     public function test_run_legacy_cron() {
@@ -69,4 +79,25 @@ class tasks_test extends \tool_objectfs\tests\testcase {
         $this->expectNotToPerformAssertions(); // Just check we get this far without any exceptions.
     }
 
+    public function test_delay_delete_orphaned_object() {
+
+        global $CFG, $DB;
+
+        $this->filesystem = new test_file_system();
+        $file = $this->create_duplicated_file(time());
+        $filehash = $file->get_contenthash();
+        $objectrecord = $DB->get_record('tool_objectfs_objects',array('contenthash' => $filehash));
+
+        $deletetime = time();
+
+        manager::update_object($objectrecord, OBJECT_LOCATION_ORPHANED);
+
+        $task = \core\task\manager::get_scheduled_task('\\tool_objectfs\\task\\delete_orphaned_object_metadata');
+        $task->execute();
+
+        $allorphanedcount = self::orphaned_count(0);
+        $afterdeletetimeorphanedcount = self::orphaned_count( $deletetime );
+
+        $this->assertTrue($allorphanedcount == $afterdeletetimeorphanedcount);
+    }
 }
