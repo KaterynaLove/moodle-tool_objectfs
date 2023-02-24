@@ -622,11 +622,8 @@ abstract class object_file_system extends \file_system_filedir {
      * Deletes external file depending on deleteexternal settings.
      *
      * @param string $contenthash file to be moved
-     * @param boolean $forcedelete will force to delete the file
      */
     public function delete_external_file_from_hash($contenthash, $force = false) {
-        global $DB;
-
         if ($force || (!empty($this->deleteexternally) && $this->deleteexternally == TOOL_OBJECTFS_DELETE_EXTERNAL_FULL)) {
             $currentpath = $this->get_external_path_from_hash($contenthash);
             $this->externalclient->delete_file($currentpath);
