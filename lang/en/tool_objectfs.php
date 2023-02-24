@@ -35,9 +35,11 @@ $string['pull_objects_from_storage_task'] = 'Object file system download objects
 $string['recover_error_objects_task'] = 'Object error recovery task';
 $string['check_objects_location_task'] = 'Object file system check objects location task';
 $string['orphan_objects_task'] = 'Object file system orphan objects task';
+
 $string['generate_status_report_task'] = 'Object status report generator task';
 $string['not_enabled'] = 'The object file system background tasks are not enabled. No objects will move location until you do.';
 $string['client_not_available'] = 'The configured remote client is not available. Please ensure it is installed correctly.';
+
 $string['object_status:page'] = 'Object status';
 $string['object_status:location'] = 'Object location';
 $string['object_status:locationhistory'] = 'Object location history';
@@ -46,9 +48,12 @@ $string['object_status:mime_type'] = 'Mime type';
 $string['object_status:count'] = 'Objects';
 $string['object_status:size'] = 'Total size';
 $string['object_status:runningsize'] = 'Running total';
+
 $string['page:missingfiles'] = 'Missing from filedir and external storage files';
+
 $string['filename:missingfiles'] = 'missingfiles';
 $string['fixturefilemissing'] = 'The fixture file is missing';
+
 $string['object_status:location:error'] = 'Missing from filedir and external storage (<a href="/admin/tool/objectfs/missing_files.php">view files</a>)';
 $string['object_status:location:duplicated'] = 'Duplicated in filedir and external storage';
 $string['object_status:location:local'] = 'Marked as only in filedir';
@@ -73,13 +78,17 @@ $string['object_status:location:filedircount'] = 'Filedir (count)';
 $string['object_status:location:filedirsize'] = 'Filedir (size)';
 $string['object_status:location:deltacount'] = 'Delta (count)';
 $string['object_status:location:deltasize'] = 'Delta (size)';
+
 $string['object_status:filedir'] = 'Filedir';
 $string['object_status:delta:a'] = 'Delta (filedir - objectfs)';
 $string['object_status:delta:b'] = 'Delta (objectfs - filedir)';
 $string['object_status:filedir:count'] = 'File counting';
 $string['object_status:filedir:update'] = 'Update stats';
+
+
 $string['object_status:last_run'] = 'This report was generated on {$a}';
 $string['object_status:never_run'] = 'The task to generate this report has not been run.';
+
 $string['rangerequestfailed'] = '<strong>URL</strong>: {$a->url}<br><strong>HTTP code</strong>: {$a->httpcode}<br><strong>Details</strong>: {$a->details}';
 $string['settings'] = 'Settings';
 $string['settings:enabletasks'] = 'Enable background transfer tasks';
@@ -88,14 +97,18 @@ $string['settings:enablelogging'] = 'Enable real time logging';
 $string['settings:enablelogging_help'] = 'Enable or disable file system logging. Will output diagnostic information to the php error log. ';
 $string['settings:useproxy'] = 'Use proxy';
 $string['settings:useproxy_help'] = 'Objectfs can use configured proxy to reach external storage.';
+
 $string['settings:generalheader'] = 'General Settings';
+
 $string['settings:clientnotavailable'] = 'Client for current file system is not available. Please install the required dependencies if this is the desired object storage client.';
+
 $string['settings:clientselection:header'] = 'Storage File System Selection';
 $string['settings:clientselection:title'] = 'Storage File System';
 $string['settings:clientselection:title_help'] = 'The storage file system. This is also the active file system for the background tasks.';
 $string['settings:clientselection:mismatchfilesystem'] = 'This setting should match $CFG->alternative_file_system_class';
 $string['settings:clientselection:filesystemnotdefined'] = '$CFG->alternative_file_system_class should be set in your Moodle config.php';
 $string['settings:clientselection:fsapinotbackported'] = 'File system API (MDL-46375) is not backported. Follow up <a href="https://github.com/catalyst/moodle-tool_objectfs#backporting">Backporting</a> README section.';
+
 $string['settings:aws:header'] = 'Amazon S3 Settings';
 $string['settings:aws:key'] = 'Key';
 $string['settings:aws:key_help'] = 'Amazon S3 key credential.';
@@ -114,6 +127,7 @@ $string['settings:aws:sdkcredsok'] = 'AWS credentials found. This setting can be
 $string['settings:aws:sdkcredserror'] = 'Couldn\'t find AWS credentials. It\'s unsafe to enable this setting. Follow up <a href="https://docs.aws.amazon.com/sdk-for-php/v3/developer-guide/guide_credentials.html">AWS documentation</a>.';
 $string['settings:aws:key_prefix'] = 'Prefix to use in bucket';
 $string['settings:aws:key_prefix_help'] = 'Prefix to use inside Amazon S3 bucket. Must end with trailing slash when set. Leave blank to use root of bucket.';
+
 $string['settings:do:header'] = 'DigitalOcean Spaces Settings';
 $string['settings:do:key'] = 'Key';
 $string['settings:do:key_help'] = 'DO Spaces key credential.';
@@ -123,6 +137,7 @@ $string['settings:do:space'] = 'Space';
 $string['settings:do:space_help'] = 'DO Space to store files in.';
 $string['settings:do:region'] = 'Region';
 $string['settings:do:region_help'] = 'DO Spaces API gateway region.';
+
 $string['settings:azure:header'] = 'Azure Blob Storage Settings';
 $string['settings:azure:accountname'] = 'Account name';
 $string['settings:azure:accountname_help'] = 'The name of the storage account.';
@@ -130,6 +145,7 @@ $string['settings:azure:container'] = 'Container name';
 $string['settings:azure:container_help'] = 'The name of the container that will store the blobs.';
 $string['settings:azure:sastoken'] = 'Shared Access Signature';
 $string['settings:azure:sastoken_help'] = 'This Shared Access Signature should have the following two capabilites only. Read, write.';
+
 $string['settings:openstack:header'] = 'Openstack Swift Object Storage Settings';
 $string['settings:openstack:username'] = 'User name';
 $string['settings:openstack:username_help'] = 'The username of the storage account.';
@@ -145,6 +161,7 @@ $string['settings:openstack:projectid'] = 'Project ID';
 $string['settings:openstack:projectid_help'] = 'The Openstack Project ID';
 $string['settings:openstack:container'] = 'Container name';
 $string['settings:openstack:container_help'] = 'The name of the container that will store the objects.';
+
 $string['settings:filetransferheader'] = 'File Transfer Settings';
 $string['settings:sizethreshold'] = 'Minimum size threshold (bytes)';
 $string['settings:sizethreshold_help'] = 'Minimum size threshold for transfering objects to external object storage. If objects are over this size they will be transfered.';
@@ -152,8 +169,10 @@ $string['settings:batchsize'] = 'Number files in one batch';
 $string['settings:batchsize_help'] = 'Number of files to be transferred in one cron run';
 $string['settings:maxorphanedage'] = 'Max orphaned object age';
 $string['settings:maxorphanedage_help'] = 'If set to zero, this will not delete old orphaned metadata for objects. Otherwise, it will remove these records as they are no longer relevant. An orphaned object is one where the metadata exists on the {tool_objectfs_objects} table but referenced file no longer exists.';
+
 $string['settings:delaydeleteexternalobject'] = 'Delay delete external object';
 $string['settings:delaydeleteexternalobject_help'] = 'Delay delete of external <strong>orphaned</strong> objects. They will be deleted once this time has passed after they became orphaned.';
+
 $string['settings:minimumage'] = 'Minimum age';
 $string['settings:minimumage_help'] = 'Minimum age that a object must exist on the local filedir before it will be considered for transfer.';
 $string['settings:deleteexternal'] = 'Delete external objects';
@@ -168,6 +187,7 @@ $string['settings:maxtaskruntime'] = 'Maximum transfer task runtime';
 $string['settings:maxtaskruntime_help'] = 'Background tasks handle the transfer of objects to and from external object storage. This setting controlls the maximum runtime for all object transfer related tasks to process 1000 files.';
 $string['settings:preferexternal'] = 'Prefer external objects';
 $string['settings:preferexternal_help'] = 'If a file is stored both locally and in external object storage, read from external\. This is setting is mainly for testing purposes and introduces overhead to check the location.';
+
 $string['settings:presignedurl:header'] = 'Pre-Signed URLs Settings';
 $string['settings:presignedurl:coresupport'] = 'Feature is not supported by core, you need to cherry pick: <a href="https://github.com/catalyst/moodle-tool_objectfs#allow-support-for-xsendfile-in-alternative-file-system">xsendfile support</a>';
 $string['settings:presignedurl:filetypesclass'] = 'Pre-Signed URLs can\'t be configured, you need to backport MDL-53240';
@@ -184,12 +204,15 @@ $string['settings:presignedurl:proxyrangerequests_help'] = 'Pre-Signed URLs do n
 $string['settings:presignedurl:xsendfilefile'] = 'Backport MDL-68342 to get benefits of this setting.';
 $string['settings:presignedurl:testrangeok'] = 'Successfully tested range request.';
 $string['settings:presignedurl:testrangeerror'] = 'Test range request failed';
+
 $string['settings:presignedurl:enablepresigneds3urls'] = 'S3 Pre-Signed URLs';
 $string['settings:presignedurl:enablepresigneds3urls_help'] = 'Enable Pre-Signed S3 URLs to request content directly from external storage.';
+
 $string['settings:presignedurl:whitelist'] = 'Pre-Signed URL whitelist.';
 $string['settings:presignedurl:whitelist_help'] = 'Only whitelisted file extensions will be redirected to Pre-Signed URL.';
 $string['settings:presignedurl:deletedsuccess'] = 'Files deleted successfully.';
 $string['settings:presignedurl:deletefiles'] = 'Delete test files.';
+
 $string['settings:presignedcloudfronturl:header'] = 'Cloudfront Settings (Experimental)';
 $string['settings:presignedcloudfronturl:warning'] = 'Before enabling Cloudfront Pre-Signed URL, please, make sure that all tests are passed successfully: ';
 $string['settings:presignedcloudfronturl:enablepresignedcloudfronturls'] = 'Cloudfront Pre-Signed URLs';
@@ -212,6 +235,7 @@ $string['settings:presignedcloudfronturl:cloudfront_pem_found'] = 'Cloudfront pr
 $string['settings:presignedcloudfronturl:cloudfront_pem_not_found'] = 'Cloudfront private key (.pem) is invalid.';
 $string['settings:relyonorphancleanup'] = 'Delete external file on orphan clean-up';
 $string['settings:fulldelete'] = 'Delete completely';
+
 $string['pleaseselect'] = 'Please, select';
 $string['presignedurl_testing:page'] = 'Pre-Signed URL Testing';
 $string['presignedurl_testing:presignedurlsnotsupported'] = 'Pre-Signed URLs are not supported by chosen storage file system.';
@@ -228,6 +252,7 @@ $string['presignedurl_testing:objectfssettings'] = 'Objectfs settings';
 $string['presignedurl_testing:checkconnectionsettings'] = 'Check connection settings at ';
 $string['presignedurl_testing:checkclientsettings'] = 'Check client settings at ';
 $string['presignedurl_testing:checkfssettings'] = 'Check filesystem settings at ';
+
 $string['settings:connectionsuccess'] = 'Could establish connection to the external object storage.';
 $string['settings:connectionfailure'] = 'Could not establish connection to the external object storage. {$a}';
 $string['settings:writefailure'] = 'Could not write object to the external object storage. ';
@@ -236,11 +261,14 @@ $string['settings:deletesuccess'] = 'Could delete object from the external objec
 $string['settings:deleteerror'] = 'Could not delete object from the external object storage. ';
 $string['settings:permissioncheckpassed'] = 'Permissions check passed.';
 $string['settings:handlernotset'] = '$CFG->alternative_file_system_class is not set, the file system will not be able to read from the external object storage. Background tasks can still function.';
+
 $string['settings:testingheader'] = 'Test Settings';
 $string['settings:testingdescr'] = 'This setting is mainly for testing purposes and introduces overhead to check the location.';
+
 $string['settings:error:numeric'] = 'Please enter a number which is greater than or equal 0.';
 $string['settings:notconfigured'] = 'Missing configuration.';
 $string['total_deleted_dirs'] = 'Total number of deleted directories: ';
 $string['backportfiletypesclass'] = 'Backport MDL-53240 is missing. Follow up https://github.com/catalyst/moodle-tool_objectfs#applying-core-patches';
+
 $string['check:proxyrangerequestsdisabled'] = 'The proxy range request setting is disabled.';
 $string['checkproxy_range_request'] = 'Pre-signed URL range request proxy';

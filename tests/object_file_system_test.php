@@ -177,6 +177,45 @@ class object_file_system_test extends tests\testcase {
         $this->assertEquals(OBJECT_LOCATION_ERROR, $location);
     }
 
+     public function test_create_external_orphaned_object_record_in_the_table() {
+        global $CFG, $DB;
+
+        $this->filesystem = new test_file_system();
+        $file = $this->create_duplicated_file(time());
+        $filehash = $file->get_contenthash();
+        $objectrecord = $DB->get_record('tool_objectfs_objects',array('contenthash' => $filehash));
+
+        manager::update_object($objectrecord, OBJECT_LOCATION_ORPHANED);
+
+        $this->assertTrue($this->is_externally_readable_by_hash($filehash));
+    }
+
+    public function test_if_external_orphaned_object_is_deleted_after_delaydeleteexternalobject_setting() {
+        global $CFG, $DB;
+
+        $deleteorphanedobject = 3600;
+        $delayquery = '';
+
+        $params = [
+            'location' => OBJECT_LOCATION_ORPHANED,
+            'deletetime' => time() - $deleteorphanedobject,
+        ];
+
+        $sql = "SELECT o.*
+            FROM {tool_objectfs_objects} o
+            LEFT JOIN {files} f ON o.contenthash = f.contenthash
+            WHERE f.id is null AND o.location = :location AND o.timeorphaned < :deletetime";
+
+        $objects = $DB->get_recordset_sql($sql, $params);
+        $this->filesystem = new test_file_system();
+        foreach ($objects as $object) {
+                // Delete the external file.
+                $filesystem->delete_external_file_from_hash($object->contenthash, true);
+                // Delete the metadata in the object table.
+                $DB->delete_records('tool_objectfs_objects', ['id' => $object->id]);
+        }
+    }
+    
     public function test_delete_object_from_local_by_hash() {
         $file = $this->create_duplicated_file();
         $filehash = $file->get_contenthash();
