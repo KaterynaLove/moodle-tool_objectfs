@@ -67,7 +67,7 @@ class delete_orphaned_object_metadata extends task {
             $sql = "SELECT o.*
                       FROM {tool_objectfs_objects} o
                  LEFT JOIN {files} f ON o.contenthash = f.contenthash
-                     WHERE f.id is null AND o.location = :location AND timeduplicated < :ageforremoval
+                     WHERE f.id is null AND o.location = :location AND o.timeduplicated < :ageforremoval
                            $delayquery";
 
             $objects = $DB->get_recordset_sql($sql, $params);

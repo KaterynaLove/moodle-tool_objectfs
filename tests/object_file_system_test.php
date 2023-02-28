@@ -176,7 +176,7 @@ class object_file_system_test extends tests\testcase {
 
         $this->assertEquals(OBJECT_LOCATION_ERROR, $location);
     }
-    
+
     public function test_delete_object_from_local_by_hash() {
         $file = $this->create_duplicated_file();
         $filehash = $file->get_contenthash();
